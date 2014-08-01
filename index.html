@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+         <script src="drawcanvas.js"></script>
+        <style>
+            html,body
+            {
+                padding: 0;
+                margin: 0;
+            }
+            
+            .red
+            {
+                width: 500px;
+                height: 200px;
+                background: red;
+                position: absolute;
+                z-index: 1;
+            }
+            
+            .gray
+            {
+                position: relative;
+                //margin: 20px 50px;
+                background: #b6ff00;
+                width: 100px;
+                height: 100px;                
+            }
+             
+            .green
+            {
+                width: 200px;
+                height: 200px;
+                background: green;
+                margin: 200px 100px;
+            }
+            
+           .can
+           {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              z-index: 9999;
+              display: none;
+           }
+                         
+        </style>
+    </head>
+    <body onresize="drawCanvas()">
+        <canvas id="myCanva" class="can" width="500" height="600"></canvas>
+
+        <div class="red" id="one">
+            <div class="gray" id="ins">SASi</div>
+        </div>
+        <br>
+       
+        <br>
+
+        <div class="green" id="white">
+        </div>
+        <br>
+
+        <div id="gray" style="position: fixed;top:50px;right:50px;width: 500px;height: 200px;background: red">
+        </div>
+
+        <script>
+
+            var b = document.getElementById("black");
+            var wh = document.getElementById("white");
+            var g = document.getElementById("gray");
+            var o = document.getElementById("one");
+            var ins = document.getElementById("ins");
+            var canvas = document.getElementById("myCanva");
+            var ctx;
+            var h, w;
+
+            window.onload = drawCanvas();
+
+            function drawCanvas() {
+                w = window.innerWidth - 5;
+                h = window.innerHeight - 5;
+
+                canvas.width = "" + w;
+                canvas.height = "" + h;
+
+                ctx = canvas.getContext("2d");
+            }
+
+            function show(id) {
+                canvas.style.display = "block";
+
+                var bounds = id.getBoundingClientRect();
+
+                var w = bounds.width;
+                var h = bounds.height;
+
+                var tm = bounds.top;
+                var lm = bounds.left;
+
+                var x, y;
+
+                var radius;
+
+                if (w > h) {
+                    radius = (w / 2) + 50;
+                }
+                else {
+                    radius = (h / 2) + 50;
+                }
+
+                x = lm + (w / 2);
+                y = tm + (h / 2);
+
+                drawCircle(x, y, radius, ctx);
+            }
+
+            function reset() {
+                canvas.style.display = "none";
+            }
+
+
+        </script>
+
+    </body>
+</html>
